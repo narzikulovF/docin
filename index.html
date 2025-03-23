@@ -63,6 +63,12 @@
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
         </div>
 
+        <!-- Telegram Phone Prompt -->
+        <div id="telegram-phone-field" class="hidden">
+          <input type="text" placeholder="Enter your phone number"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
         <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold">
           Continue
         </button>
@@ -105,13 +111,14 @@
   <script type="text/javascript">
     function onTelegramAuth(user) {
       alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+      document.getElementById('telegram-phone-field').classList.remove('hidden');
     }
 
     function launchTelegramLogin() {
-      const botId = 7632971779;
+      const botUsername = 'DocinuzBot';
       const origin = window.location.origin.startsWith('http') ? window.location.origin : 'https://yourdomain.com';
       window.open(
-        `https://oauth.telegram.org/auth?bot_id=${botId}&origin=${encodeURIComponent(origin)}&embed=0`,
+        `https://oauth.telegram.org/auth?bot=${botUsername}&origin=${encodeURIComponent(origin)}&embed=0&request_access=write`,
         '_blank',
         'width=500,height=500'
       );
