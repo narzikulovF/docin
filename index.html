@@ -13,6 +13,8 @@
       border-radius: 9999px;
       display: block;
       margin: 0 auto;
+      padding: 0;
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -51,7 +53,7 @@
     <div class="space-y-3 mb-4">
 
       <!-- Telegram Login Widget -->
-      <div class="w-full">
+      <div class="w-full overflow-hidden rounded-full">
         <script async src="https://telegram.org/js/telegram-widget.js?22"
                 data-telegram-login="DocinuzBot"
                 data-size="medium"
@@ -84,7 +86,7 @@
 
       <!-- USB Token Button -->
       <button class="w-full flex items-center justify-center gap-2 bg-gray-100 py-2 rounded-full font-medium hover:bg-gray-200">
-        🧿 USB Token
+        🧿 USB Token (E-Key)
       </button>
 
     </div>
