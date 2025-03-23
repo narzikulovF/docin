@@ -7,14 +7,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    telegram-widget {
-      width: 100% !important;
-      display: flex;
-      justify-content: center;
-    }
     iframe[src*="telegram.org"] {
       width: 100% !important;
+      height: 48px !important;
       border-radius: 9999px;
+      display: block;
+      margin: 0 auto;
     }
   </style>
 </head>
@@ -86,7 +84,7 @@
 
       <!-- USB Token Button -->
       <button class="w-full flex items-center justify-center gap-2 bg-gray-100 py-2 rounded-full font-medium hover:bg-gray-200">
-        🧿 USB Token (E-Key)
+        🧿 USB Token
       </button>
 
     </div>
