@@ -116,9 +116,10 @@
 
     function launchTelegramLogin() {
       const botUsername = 'DocinuzBot';
+      const botId = '7632971779';
       const origin = window.location.origin.startsWith('http') ? window.location.origin : 'https://yourdomain.com';
       window.open(
-        `https://oauth.telegram.org/auth?bot=${botUsername}&origin=${encodeURIComponent(origin)}&embed=0&request_access=write`,
+        `https://oauth.telegram.org/auth?bot=${botUsername}&bot_id=${botId}&origin=${encodeURIComponent(origin)}&embed=0&request_access=write`,
         '_blank',
         'width=500,height=500'
       );
