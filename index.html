@@ -6,96 +6,92 @@
   <title>ERP Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-    iframe[src*="telegram.org"] {
-      width: 100% !important;
-      height: 50px !important;
-      border-radius: 9999px;
-      display: block;
-      padding: 0;
-      box-sizing: border-box;
-    }
-  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+<body class="min-h-screen flex">
 
-    <!-- Logo -->
-    <div class="flex justify-center mb-6">
-      <div class="w-16 h-16 bg-gray-200 rounded-full"></div>
-    </div>
+  <!-- Left: Login Form -->
+  <div class="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 bg-white">
+    <div class="w-full max-w-md">
 
-    <!-- Title -->
-    <h2 class="text-2xl font-bold text-center mb-6">Login to Your Company ERP</h2>
-
-    <!-- Login Form -->
-    <form action="#" method="post" class="space-y-4">
-      <input type="text" name="identifier" placeholder="Email / Phone / Username"
-             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      
-      <div class="relative">
-        <input type="password" name="password" placeholder="Password"
-               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <span class="absolute right-4 top-2.5 cursor-pointer text-gray-400">👁</span>
+      <!-- Logo -->
+      <div class="flex justify-center mb-6">
+        <div class="w-16 h-16 bg-gray-200 rounded-full"></div>
       </div>
 
-      <button type="submit"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg">
-        Login
-      </button>
-    </form>
+      <!-- Title -->
+      <h2 class="text-2xl font-bold text-center mb-2">Welcome Back</h2>
+      <p class="text-center text-gray-500 mb-6">Please enter your credentials to continue</p>
 
-    <!-- Divider -->
-    <div class="my-6 text-center text-gray-500">or login with</div>
-
-    <!-- Third-Party Login Buttons -->
-    <div class="space-y-3 mb-4">
-
-      <!-- Telegram Login Widget wrapped -->
-      <div class="w-full flex justify-center">
-        <div class="w-full">
-          <script async src="https://telegram.org/js/telegram-widget.js?22"
-                  data-telegram-login="DocinuzBot"
-                  data-size="large"
-                  data-userpic="false"
-                  data-onauth="onTelegramAuth(user)"
-                  data-request-access="write">
-          </script>
-        </div>
+      <!-- Mode Selection Tabs -->
+      <div class="flex space-x-2 mb-6">
+        <label class="flex items-center border px-4 py-2 rounded-lg cursor-pointer">
+          <input type="radio" name="authMode" value="key" checked class="mr-2">
+          <span class="mr-2">По ключу</span>
+          <i class="fas fa-key"></i>
+        </label>
+        <label class="flex items-center border px-4 py-2 rounded-lg cursor-pointer">
+          <input type="radio" name="authMode" value="password" class="mr-2">
+          <span class="mr-2">По паролю</span>
+          <i class="fas fa-lock"></i>
+        </label>
+        <label class="flex items-center border px-4 py-2 rounded-lg cursor-pointer">
+          <input type="radio" name="authMode" value="usb" class="mr-2">
+          <span class="mr-2">USB Token</span>
+          <i class="fas fa-lock"></i>
+        </label>
       </div>
 
-      <!-- Google Button (Material Style) -->
-      <button class="gsi-material-button w-full flex items-center justify-center gap-2 bg-white border border-gray-300 py-2 rounded-full font-medium hover:bg-gray-100">
-        <div class="gsi-material-button-content-wrapper flex items-center gap-2">
-          <div class="gsi-material-button-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-5 h-5">
-              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
-              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
-              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
-              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
-              <path fill="none" d="M0 0h48v48H0z"></path>
-            </svg>
+      <!-- Form -->
+      <form id="loginForm" class="space-y-4">
+        <div id="fields-password">
+          <input type="text" placeholder="Email / Phone / Username"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <div class="relative mt-2">
+            <input type="password" placeholder="Password"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <span class="absolute right-4 top-2.5 text-gray-400">👁</span>
           </div>
-          <span class="gsi-material-button-contents">Sign in with Google</span>
         </div>
-      </button>
 
-      <!-- OneID Button -->
-      <button class="w-full flex items-center justify-center gap-2 bg-gray-100 py-2 rounded-full font-medium hover:bg-gray-200">
-        🇺🇿 Login with OneID
-      </button>
+        <div id="fields-key" class="hidden">
+          <input type="text" placeholder="Enter Key ID"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
 
-      <!-- USB Token Button -->
-      <button class="w-full flex items-center justify-center gap-2 bg-gray-100 py-2 rounded-full font-medium hover:bg-gray-200">
-        🧿 USB Token (E-Key)
-      </button>
+        <div id="fields-usb" class="hidden">
+          <input type="text" placeholder="Insert USB Token and click here"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+        </div>
 
-    </div>
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold">
+          Continue
+        </button>
+      </form>
 
-    <!-- Footer -->
-    <div class="flex justify-between text-sm text-gray-500">
-      <a href="#" class="hover:underline">Forgot password?</a>
-      <div>
+      <!-- Divider -->
+      <div class="my-6 text-center text-gray-500">Or login with</div>
+
+      <!-- Social Buttons -->
+      <div class="flex space-x-4 justify-center">
+        <!-- Telegram Custom Button -->
+        <a onclick="launchTelegramLogin()" 
+           class="w-12 h-12 bg-[#1f9bda] hover:bg-[#1b86bc] rounded-full flex items-center justify-center cursor-pointer transition">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 90 90" fill="white">
+            <g transform="scale(1)">
+              <path fill="#FCFDFF" d="M36.371 52.976l19.271 14.237c2.2 1.214 3.786 0.586 4.334-2.041l7.844-36.964c0.803-3.22-1.227-4.681-3.331-3.726L18.428 42.242c-3.144 1.261-3.125 3.016-0.573 3.797l11.821 3.689L57.04 32.464c1.292-0.783 2.478-0.362 1.505 0.502L36.371 52.976z"/>
+            </g>
+          </svg>
+        </a>
+
+        <!-- Google -->
+        <a href="#" class="w-12 h-12 rounded-full bg-white border border-gray-300 flex items-center justify-center">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 h-5" alt="Google">
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex justify-between text-sm text-gray-500 mt-6">
+        <a href="#" class="hover:underline">Forgot password?</a>
         <select class="bg-transparent">
           <option>EN</option>
           <option>UZ</option>
@@ -103,14 +99,41 @@
         </select>
       </div>
     </div>
-
   </div>
 
-  <!-- Telegram Auth Script -->
+  <!-- Right: Illustration -->
+  <div class="hidden lg:flex w-1/2 bg-blue-50 items-center justify-center">
+    <img src="https://cdn-icons-png.flaticon.com/512/270/270014.png" class="w-80 h-80 object-contain" alt="ERP Illustration">
+  </div>
+
   <script type="text/javascript">
     function onTelegramAuth(user) {
       alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
     }
+
+    function launchTelegramLogin() {
+      window.open(
+        'https://oauth.telegram.org/auth?bot=DocinuzBot&origin=' + encodeURIComponent(window.location.origin) + '&embed=0',
+        '_blank',
+        'width=500,height=500'
+      );
+    }
+
+    const radioButtons = document.querySelectorAll('input[name="authMode"]');
+    const fields = {
+      key: document.getElementById('fields-key'),
+      password: document.getElementById('fields-password'),
+      usb: document.getElementById('fields-usb'),
+    };
+
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', () => {
+        Object.keys(fields).forEach(key => {
+          fields[key].classList.add('hidden');
+        });
+        fields[radio.value].classList.remove('hidden');
+      });
+    });
   </script>
 </body>
 </html>
